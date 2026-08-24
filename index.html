@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Feature Requirement Gathering (18 ข้อ)</title>
+  <!-- Load LINE LIFF SDK -->
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <!-- Load Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Centered phone frame container -->
+  <div class="container">
+    
+    <!-- Curved Header Banner -->
+    <div class="app-header">
+      <!-- LINE OA branding content -->
+      <div class="header-main-content">
+        <div class="line-logo-wrapper">
+          <svg width="46" height="46" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="24" fill="white"/>
+            <path d="M35.3 22.8c0-5.1-5.1-9.2-11.3-9.2S12.7 17.7 12.7 22.8c0 4.6 4 8.4 9.4 9.1.4.1.9.2 1 .5l.1.9c0 .5-.1 1.2-.2 1.9 0 .1-.1.3 0 .4.1.1.2.1.3.1.2 0 .4-.1.6-.2 1.3-.9 3.6-2.7 4.9-3.9 4-2.2 6.5-5.3 6.5-8.7zm-14.7-2.3h-2c-.3 0-.5.2-.5.5v3.6c0 .3.2.5.5.5h2c.3 0 .5-.2.5-.5s-.2-.5-.5-.5h-1.5v-1h1.5c.3 0 .5-.2.5-.5s-.2-.5-.5-.5h-1.5v-1h1.5c.3 0 .5-.2.5-.5s-.2-.5-.5-.5zm3.5.5c0-.3-.2-.5-.5-.5s-.5.2-.5.5v3.6c0 .3.2.5.5.5s.5-.2.5-.5v-3.6zm5.8-.5H28c-.3 0-.5.2-.5.5v3.6c0 .3.2.5.5.5h1.9c.3 0 .5-.2.5-.5s-.2-.5-.5-.5H28.5v-1h1.4c.3 0 .5-.2.5-.5s-.2-.5-.5-.5h-1.4v-1H29.9c.3 0 .5-.2.5-.5s-.2-.5-.5-.5zm4 0h-2.1c-.3 0-.5.2-.5.5v3.6c0 .3.2.5.5.5h2.1c.3 0 .5-.2.5-.5s-.2-.5-.5-.5h-1.6v-1h1.6c.3 0 .5-.2.5-.5s-.2-.5-.5-.5h-1.6v-1H33.9c.3 0 .5-.2.5-.5s-.2-.5-.5-.5z" fill="#06C755"/>
+          </svg>
+        </div>
+        <h1>Requirement Gathering</h1>
+        <p>กรอกข้อมูลเพื่อเก็บความต้องการระบบงาน (18 ข้อ)</p>
+      </div>
+
+      <!-- Curved divider SVG at bottom of header banner -->
+      <div class="wave-container">
+        <svg viewBox="0 0 500 60" preserveAspectRatio="none">
+          <path d="M0,35 C150,55 350,15 500,35 L500,60 L0,60 Z" style="stroke: none; fill: var(--bg-card);"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Form Area -->
+    <div class="form-area">
+      <form id="reqForm" novalidate>
+        <!-- Hidden user profile fields -->
+        <input type="hidden" id="line_user_id" name="line_user_id">
+        <input type="hidden" id="displayName" name="displayName">
+
+        <!-- Question 1 -->
+        <div class="form-group">
+          <label for="q1_subject">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>1. ต้องการขอฟังก์ชันอะไร?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            <textarea id="q1_subject" name="q1_subject" required placeholder="อธิบายฟังก์ชันที่ต้องการ และเหตุผล / ปัญหาที่ต้องการแก้ไข..."></textarea>
+          </div>
+          <div class="helper-text">
+            • อธิบายฟังก์ชันที่ต้องการ และเหตุผล / ปัญหาที่ต้องการแก้ไข<br>
+            • ต้องการให้ระบบช่วยเรื่องอะไร?<br>
+            • ปัจจุบันมีปัญหาอะไร?<br>
+            • ต้องการให้ระบบช่วยลดงานส่วนไหน?
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 2 -->
+        <div class="form-group">
+          <label for="q2_doctypes">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span>2. Doctype / เอกสารไหนเกี่ยวข้องบ้าง?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <input type="text" id="q2_doctypes" name="q2_doctypes" required placeholder="เช่น Sales Order, Tax Invoice, Purchase Request">
+          </div>
+          <div class="helper-text">
+            • ระบุเอกสารที่เกี่ยวข้องกับกระบวนการนี้ทั้งหมด<br>
+            • เอกสารที่ใช้เริ่มต้น<br>
+            • เอกสารที่เกี่ยวข้องระหว่างกระบวนการ<br>
+            • เอกสารที่ต้องสร้างต่อ<br>
+            • เอกสารที่ต้องนำข้อมูลมาใช้ร่วมกัน
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 3 -->
+        <div class="form-group">
+          <label for="q3_asis">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span>3. As-Is ปัจจุบันทำงานอย่างไร?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            <textarea id="q3_asis" name="q3_asis" required placeholder="ระบุขั้นตอนการทำงานปัจจุบันตั้งแต่เริ่มต้นจนจบ..."></textarea>
+          </div>
+          <div class="helper-text">
+            • ระบุขั้นตอนการทำงานปัจจุบันตั้งแต่เริ่มต้นจนจบ พร้อมระบุ:<br>
+            • ขั้นตอนไหนทำในระบบ<br>
+            • ขั้นตอนไหนทำ Manual<br>
+            • ขั้นตอนไหนใช้ Excel / Email / Line<br>
+            • ปัญหาที่พบในแต่ละขั้นตอน
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 4 -->
+        <div class="form-group">
+          <label for="q4_tobe">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+            <span>4. To-Be ต้องการให้ทำงานอย่างไร?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <textarea id="q4_tobe" name="q4_tobe" required placeholder="ระบุขั้นตอนการทำงานที่ต้องการหลังพัฒนา..."></textarea>
+          </div>
+          <div class="helper-text">
+            • ระบุขั้นตอนการทำงานที่ต้องการหลังพัฒนาเสร็จ:<br>
+            • เริ่มจากอะไร → ใครทำ → ระบบทำอะไร → ได้ผลลัพธ์อะไร
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="form-group">
+          <label for="q5_conditions">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            <span>5. เงื่อนไขในการทำงานมีอะไรบ้าง?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <input type="text" id="q5_conditions" name="q5_conditions" required placeholder="ระบุเงื่อนไขการทำงานและข้อกำหนด...">
+          </div>
+          <div class="helper-text">
+            • ระบุเงื่อนไขที่เกี่ยวข้อง เช่น:<br>
+            • จำนวนเงิน / จำนวนสินค้า / วันที่ / สถานะเอกสาร / ประเภทสินค้า / ลูกค้า / Supplier / สาขา / บริษัท / ผู้ใช้งาน / เงื่อนไขอื่น ๆ
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 6 -->
+        <div class="form-group">
+          <label for="q6_workflow">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+            <span>6. Workflow / สถานะเอกสารเป็นอย่างไร?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 6v6l4 2"></path></svg>
+            <textarea id="q6_workflow" name="q6_workflow" required placeholder="ระบุขั้นตอนสถานะและการอนุมัติ Workflow..."></textarea>
+          </div>
+          <div class="helper-text">
+            • ควรตกลง State / สถานะของเอกสารให้จบตั้งแต่ตอนเก็บ Requirement และระบุ:<br>
+            • เอกสารเริ่มต้นด้วยสถานะอะไร / มีสถานะอะไรบ้าง / ใครเป็นคนเปลี่ยนสถานะ / แต่ละสถานะทำอะไรได้ / ใครเป็นผู้อนุมัติ / ถ้าไม่อนุมัติ หรือ Reject ต้องกลับไปสถานะไหน / เมื่อแก้ไขแล้วต้องส่งอนุมัติใหม่หรือไม่<br>
+            • <b>Concern:</b> ขอให้ตกลง Workflow และสถานะร่วมกันให้ชัดเจนก่อนเริ่มพัฒนา
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 7 -->
+        <div class="form-group">
+          <label for="q7_permissions">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>7. ใครมีสิทธิ์ทำอะไรบ้าง?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <input type="text" id="q7_permissions" name="q7_permissions" required placeholder="ระบุสิทธิ์ผู้ใช้งานแยกตามตำแหน่ง...">
+          </div>
+          <div class="helper-text">
+            • ระบุว่าแต่ละฝ่าย / แต่ละตำแหน่งสามารถทำอะไรกับเอกสารได้:<br>
+            • ดู / สร้าง / แก้ไข / ส่งอนุมัติ / อนุมัติ / ยกเลิก / พิมพ์ / ดาวน์โหลด / รวมถึง ใครเห็น หรือไม่เห็นข้อมูลบางส่วน
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 8 -->
+        <div class="form-group">
+          <label for="q8_approval">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+            <span>8. ต้องมี Approval / การอนุมัติหรือไม่?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <input type="text" id="q8_approval" name="q8_approval" required placeholder="ระบุขั้นตอนการอนุมัติเอกสาร...">
+          </div>
+          <div class="helper-text">
+            • ถ้ามี ให้ระบุ:<br>
+            • ใครเป็นผู้ขอ / ใครอนุมัติ / มีผู้อนุมัติกี่ระดับ / อนุมัติตามเงื่อนไขอะไร / ถ้าไม่อนุมัติทำอย่างไร / ถ้าแก้ไขข้อมูลหลังไม่อนุมัติ ต้องส่งอนุมัติใหม่หรือไม่
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 9 -->
+        <div class="form-group">
+          <label for="q9_notifications">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <span>9. ต้องมี Notification / การแจ้งเตือนหรือไม่?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <input type="text" id="q9_notifications" name="q9_notifications" required placeholder="ระบุรูปแบบการแจ้งเตือนของระบบ...">
+          </div>
+          <div class="helper-text">
+            • ระบุ: แจ้งใคร / แจ้งเมื่อเกิดเหตุการณ์อะไร / ต้องการแจ้งผ่าน Email หรือกระดิ่งในระบบ / ต้องแจ้งทั้ง Email และกระดิ่งหรือไม่<br>
+            • ตัวอย่าง: เมื่อมีเอกสารรออนุมัติ → แจ้งผู้อนุมัติผ่านกระดิ่งในระบบ
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="form-group">
+          <label for="q10_integration">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            <span>10. ต้องเชื่อมต่อกับระบบอื่นหรือไม่?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            <input type="text" id="q10_integration" name="q10_integration" required placeholder="ระบุการรับส่งข้อมูลภายนอก...">
+          </div>
+          <div class="helper-text">
+            • พิจารณาว่าต้องส่งหรือรับข้อมูลจากระบบอื่นหรือไม่ เช่น LINE, ระบบชำระเงิน, ระบบภายนอกของบริษัท, ระบบอื่นที่ใช้งานอยู่<br>
+            • ระบุ: ต้องการส่งข้อมูลอะไร / ต้องการรับข้อมูลอะไร / ต้องการให้ระบบทำงานอัตโนมัติเมื่อใด<br>
+            • <b>Concern:</b> หากเชื่อมโยงได้ ควรพิจารณาตั้งแต่ต้นเพื่อลดขั้นตอนการกรอกข้อมูลซ้ำซ้อน
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 11: Legacy Data Custom Click Cards -->
+        <div class="form-group">
+          <label>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path></svg>
+            <span>11. ข้อมูลเดิมต้องนำมาใช้ด้วยหรือไม่?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="radio-card-group">
+            <div class="radio-card active" data-value="ใช้เฉพาะข้อมูลใหม่" onclick="selectRadioCard('q11_legacy_data', 'ใช้เฉพาะข้อมูลใหม่', this)">
+              <div class="radio-card-header">
+                <span class="radio-card-title">ใช้เฉพาะข้อมูลใหม่</span>
+                <div class="radio-card-circle"></div>
+              </div>
+              <div class="radio-card-desc">เริ่มต้นบันทึกข้อมูลใหม่เมื่อระบบเริ่มใช้งาน ไม่นำเข้าประวัติข้อมูลเก่า</div>
+            </div>
+            
+            <div class="radio-card" data-value="ใช้ข้อมูลเก่าด้วย" onclick="selectRadioCard('q11_legacy_data', 'ใช้ข้อมูลเก่าด้วย', this)">
+              <div class="radio-card-header">
+                <span class="radio-card-title">ใช้ข้อมูลเก่าด้วย</span>
+                <div class="radio-card-circle"></div>
+              </div>
+              <div class="radio-card-desc">ต้องการโอนย้าย หรือนำประวัติข้อมูลเก่าเข้าระบบใหม่ด้วย</div>
+            </div>
+          </div>
+          <div class="helper-text">
+            • ระบุว่าฟังก์ชันใหม่ต้องใช้กับข้อมูลเก่าหรือไม่:<br>
+            • ต้องนำข้อมูลเก่ามาแสดง หรือต้องปรับปรุงข้อมูลเก่าให้เข้ากับรูปแบบใหม่ด้วยหรือไม่
+          </div>
+          <input type="hidden" id="q11_legacy_data" name="q11_legacy_data" value="ใช้เฉพาะข้อมูลใหม่">
+        </div>
+        
+        <!-- Question 12 -->
+        <div class="form-group">
+          <label for="q12_master_data">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <span>12. ต้องมีการปรับปรุงข้อมูลหลัก (Master Data) หรือไม่?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <input type="text" id="q12_master_data" name="q12_master_data" required placeholder="พิจารณาเพิ่ม/แก้ไขข้อมูลหลัก เช่น ลูกค้า, สินค้า ฯลฯ">
+          </div>
+          <div class="helper-text">
+            • พิจารณาว่าต้องเพิ่ม / แก้ไขข้อมูลหลักหรือไม่ เช่น ลูกค้า, Supplier, สินค้า, คลังสินค้า, พนักงาน, สาขา, บริษัท, บัญชี<br>
+            • ระบุด้วยว่า มีข้อมูลเดิมอะไรที่ควรปรับปรุงก่อนเริ่มใช้งานหรือไม่
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 13 -->
+        <div class="form-group">
+          <label for="q13_print_format">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            <span>13. ต้องเพิ่ม / แก้ไข Print Format หรือไม่?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 6v6l4 2"></path></svg>
+            <input type="text" id="q13_print_format" name="q13_print_format" required placeholder="ขนาดกระดาษ (A4 / A5), แนวตั้ง/แนวนอน, จำนวนหน้า... ">
+          </div>
+          <div class="helper-text">
+            • ถ้ามี ให้แนบตัวอย่างเดิม และระบุสิ่งที่ต้องการ:<br>
+            • ข้อมูลที่ต้องเพิ่ม / ข้อมูลที่ต้องแก้ไข / รูปแบบเอกสาร / ขนาดกระดาษ เช่น A4 / A5 / แนวตั้ง / แนวนอน / พิมพ์กี่หน้า / ต้องการรูปแบบเฉพาะหรือไม่
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 14 -->
+        <div class="form-group">
+          <label for="q14_reports">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <span>14. ต้องเพิ่ม / แก้ไข Report หรือไม่?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+            <input type="text" id="q14_reports" name="q14_reports" required placeholder="ระบุเงื่อนไขตัวกรองรายงาน และการแสดงผล...">
+          </div>
+          <div class="helper-text">
+            • ถ้ามี ให้แนบตัวอย่าง Report / Excel และระบุ:<br>
+            • ต้องการดูข้อมูลอะไร / ค้นหาด้วยอะไร / แสดงข้อมูลอะไรบ้าง / คำนวณตัวเลขอะไร / Export Excel หรือไม่<br>
+            • <b>Concern กรณี Report ใช้ร่วมหลายฝ่าย:</b> ฝ่ายไหนดูได้ / ดูได้บางส่วน / ไม่ควรเห็น (โดยเฉพาะเรื่อง ราคา / ต้นทุน / กำไร / ยอดเงิน)
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+
+        <!-- Question 15 -->
+        <div class="form-group">
+          <label for="q15_new_fields">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            <span>15. มีข้อมูล / Field ใหม่ที่ต้องเพิ่มหรือไม่?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="15" y2="17"></line></svg>
+            <textarea id="q15_new_fields" name="q15_new_fields" required placeholder="ระบุรายละเอียดช่องข้อมูลใหม่..."></textarea>
+          </div>
+          <div class="helper-text">
+            • ระบุ: ชื่อข้อมูล / ต้องกรอกเอง หรือดึงค่า / จำเป็นต้องกรอกไหม / ให้ใครเห็นบ้าง / ให้ใครแก้ไขได้บ้าง<br>
+            • <b>Concern:</b> หากเป็นข้อมูลเกี่ยวกับเงิน / ราคา / ต้นทุน ควรระบุให้ชัดเจนว่า ฝ่ายไหนเห็นได้ และฝ่ายไหนไม่ควรเห็น
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 16 -->
+        <div class="form-group">
+          <label for="q16_attachments">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+            <span>16. ต้องมีการแนบไฟล์หรือเอกสารหรือไม่?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+            <input type="text" id="q16_attachments" name="q16_attachments" required placeholder="ระบุเงื่อนไขการอัปโหลดและแนบไฟล์...">
+          </div>
+          <div class="helper-text">
+            • ระบุเอกสารที่ต้องแนบ เช่น ใบเสนอราคา / เอกสารอนุมัติ / สัญญา / รูปภาพ<br>
+            • ระบุ: ใครแนบไฟล์ได้ / ใครสามารถเปิดดูได้ / ใครดาวน์โหลดได้ / ไฟล์บางประเภทเป็นข้อมูลภายในหรือสำคัญหรือไม่<br>
+            • <b>Concern:</b> หากมีไฟล์สำคัญและไม่ต้องการให้ทุกคนเห็น อาจพิจารณาแยกปุ่มสิทธิ์เข้าถึงเฉพาะเพื่อควบคุม
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 17 -->
+        <div class="form-group">
+          <label for="q17_exceptions">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <span>17. มีกรณีพิเศษ / Possible Case อะไรบ้าง?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <textarea id="q17_exceptions" name="q17_exceptions" required placeholder="ระบุกรณีผิดปกติหรือกรณีข้อยกเว้นที่อาจเกิดขึ้น..."></textarea>
+          </div>
+          <div class="helper-text">
+            • เหตุการณ์พิเศษนอกเหนือจากปกติ เช่น ยกเลิกเอกสาร / คืนสินค้า / ทำบางส่วน / จำนวนเกิน-ไม่ครบ / ข้อมูลซ้ำ-ไม่มี-ไม่ครบ / แก้ไขหลังส่งหรืออนุมัติ / Reject ส่งใหม่ / ผู้รับผิดชอบไม่อยู่ / ระบบอื่นล่ม<br>
+            • <b>Concern:</b> ควรช่วยกันระบุกรณีที่ "อาจเกิดขึ้นจริง" เพื่อให้ระบบรองรับตั้งแต่แรก
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+        
+        <!-- Question 18 -->
+        <div class="form-group">
+          <label for="q18_expected_result">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            <span>18. Expected Result คืออะไร?</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-container">
+            <svg class="input-prefix-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <textarea id="q18_expected_result" name="q18_expected_result" required placeholder="ระบุผลลัพธ์สุดท้ายที่คาดหวังเมื่อพัฒนาเสร็จสิ้น..."></textarea>
+          </div>
+          <div class="helper-text">
+            • เมื่อพัฒนาเสร็จสิ้น ต้องการให้ระบบ: แสดงข้อมูล / บันทึกข้อมูล / สร้างเอกสาร / เปลี่ยนสถานะ / แจ้งเตือนใคร / ส่งข้อมูลไปที่ไหน / แสดง Report หรือ Print Format อย่างไร
+          </div>
+          <div class="validation-msg">กรุณาระบุข้อมูลในช่องนี้</div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="btn-group">
+          <button type="submit" class="nav-action-btn btn-submit" id="submitBtn">
+            <span>ส่งข้อมูล</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            <div class="spinner" id="submitSpinner"></div>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Success Container -->
+    <div class="success-container" id="success-view">
+      <div class="success-icon-wrapper">
+        <svg class="success-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+          <polyline points="14 27 22 35 38 17"></polyline>
+        </svg>
+      </div>
+      <h2 style="background:none; -webkit-text-fill-color: var(--text-main); margin-bottom: 12px; font-size: 20px;">🎉 ส่งข้อมูลสำเร็จเรียบร้อย!</h2>
+      <p style="color: var(--text-sub); font-size: 13.5px; margin-bottom: 24px; max-width: 320px; line-height: 1.5; padding: 0 10px;">ขอบคุณสำหรับข้อมูลความต้องการระบบ ฟังก์ชันนี้จะถูกนำเข้าระบบวางแผนงานต่อไป</p>
+      
+      <div style="display:flex; flex-direction:column; gap:10px; width:100%; padding: 0 20px;">
+        <button type="button" class="nav-action-btn btn-next" onclick="closeLiffApp()" style="flex:none;">ปิดหน้านี้</button>
+        <button type="button" class="nav-action-btn btn-prev" onclick="restartForm()" style="flex:none;">ส่งข้อมูลเพิ่มเติม/ทำฟอร์มใหม่</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Draft recovery dialog toast -->
+  <div class="toast" id="draft-toast">
+    <span>📝 ระบบกู้คืนข้อมูลร่างที่คุณเคยกรอกไว้แล้ว</span>
+    <button class="toast-btn" onclick="clearFormDraft()">เริ่มใหม่</button>
+  </div>
+
+  <script>
+    // System Configurations
+    const LIFF_ID = "YOUR_LIFF_ID"; // 👈 ใส่ LIFF ID ของคุณที่นี่
+    const WEBHOOK_URL = "https://your-n8n-domain.com/webhook/feature-request"; // 👈 ใส่ n8n Webhook URL ของคุณที่นี่
+
+    const formEl = document.getElementById('reqForm');
+    const toastEl = document.getElementById('draft-toast');
+
+    // On Load Initializer
+    window.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      initLiffSDK();
+      restoreFormDraft();
+      setupFormListeners();
+    });
+
+    // Theme Customizations (Light/Dark Toggle)
+    function initTheme() {
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (systemPrefersDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    }
+
+    // LINE LIFF integration core handler
+    function initLiffSDK() {
+      if (LIFF_ID === "YOUR_LIFF_ID") {
+        console.warn("Please configure a valid LINE LIFF ID in index.html script configurations.");
+        setupSimulatorProfile();
+        return;
+      }
+
+      liff.init({ liffId: LIFF_ID })
+        .then(() => {
+          if (liff.isLoggedIn()) {
+            liff.getProfile().then(profile => {
+              document.getElementById('line_user_id').value = profile.userId;
+              document.getElementById('displayName').value = profile.displayName;
+            }).catch(err => console.error("Error loading LINE profile:", err));
+          } else {
+            liff.login();
+          }
+        })
+        .catch(err => {
+          console.error("LIFF initialization error:", err);
+          setupSimulatorProfile();
+        });
+    }
+
+    // Fallback Mock Profile for local sandbox testing (non-LINE client)
+    function setupSimulatorProfile() {
+      document.getElementById('line_user_id').value = "SIM_USR_99999";
+      document.getElementById('displayName').value = "Simulator User";
+    }
+
+    // Custom Radio Card selector logic
+    function selectRadioCard(fieldName, value, cardElement) {
+      document.getElementById(fieldName).value = value;
+      const group = cardElement.parentNode;
+      const cards = group.querySelectorAll('.radio-card');
+      cards.forEach(card => card.classList.remove('active'));
+      cardElement.classList.add('active');
+      saveFormDraft();
+    }
+
+    // Local Storage Draft functions
+    // Setup event listeners on form inputs
+    function setupFormListeners() {
+      const inputs = formEl.querySelectorAll('input, textarea, select');
+      inputs.forEach(input => {
+        // Clear errors as user types
+        input.addEventListener('input', () => {
+          input.classList.remove('input-error');
+          const valMsg = input.closest('.form-group').querySelector('.validation-msg');
+          if (valMsg && input.value.trim()) {
+            valMsg.style.display = 'none';
+          }
+          saveFormDraft();
+        });
+
+        // Trigger red border and message on native validation failure
+        input.addEventListener('invalid', (e) => {
+          e.preventDefault();
+          input.classList.add('input-error');
+          const valMsg = input.closest('.form-group').querySelector('.validation-msg');
+          if (valMsg) {
+            valMsg.style.display = 'block';
+          }
+          // Scroll to first error
+          const firstError = formEl.querySelector('.input-error');
+          if (firstError === input) {
+            input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            input.focus();
+          }
+        });
+      });
+    }
+
+    function saveFormDraft() {
+      const formData = new FormData(formEl);
+      const data = Object.fromEntries(formData.entries());
+      localStorage.setItem('liff_req_gathering_draft', JSON.stringify(data));
+    }
+
+    function restoreFormDraft() {
+      const draft = localStorage.getItem('liff_req_gathering_draft');
+      if (draft) {
+        try {
+          const data = JSON.parse(draft);
+          let loadedAny = false;
+          
+          Object.keys(data).forEach(key => {
+            const input = formEl.querySelector(`[name="${key}"]`);
+            if (input && data[key]) {
+              input.value = data[key];
+              loadedAny = true;
+
+              // Handle Q11 custom UI state sync
+              if (key === 'q11_legacy_data') {
+                const cards = document.querySelectorAll('.radio-card');
+                cards.forEach(card => {
+                  const cardVal = card.getAttribute('data-value');
+                  card.classList.toggle('active', cardVal === data[key]);
+                });
+              }
+            }
+          });
+
+          if (loadedAny) {
+            // Show auto-recovered notification toast
+            toastEl.classList.add('show');
+            setTimeout(() => {
+              toastEl.classList.remove('show');
+            }, 6000);
+          }
+        } catch (e) {
+          console.error("Error restoring draft:", e);
+        }
+      }
+    }
+
+    function clearFormDraft() {
+      localStorage.removeItem('liff_req_gathering_draft');
+      formEl.reset();
+      toastEl.classList.remove('show');
+      setupSimulatorProfile();
+      
+      // Reset radio cards UI
+      const cards = document.querySelectorAll('.radio-card');
+      cards.forEach(card => {
+        const cardVal = card.getAttribute('data-value');
+        card.classList.toggle('active', cardVal === 'ใช้เฉพาะข้อมูลใหม่');
+      });
+
+      alert('เริ่มกรอกแบบฟอร์มใหม่เรียบร้อยแล้ว');
+    }
+
+    // Handle Form Submit to Webhook
+    formEl.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Validate all required elements manually since novalidate is on reqForm
+      let formIsValid = true;
+      const requiredInputs = formEl.querySelectorAll('[required]');
+      let firstInvalidInput = null;
+
+      requiredInputs.forEach(input => {
+        if (!input.value.trim()) {
+          formIsValid = false;
+          input.classList.add('input-error');
+          const valMsg = input.closest('.form-group').querySelector('.validation-msg');
+          if (valMsg) valMsg.style.display = 'block';
+          if (!firstInvalidInput) firstInvalidInput = input;
+        } else {
+          input.classList.remove('input-error');
+          const valMsg = input.closest('.form-group').querySelector('.validation-msg');
+          if (valMsg) valMsg.style.display = 'none';
+        }
+      });
+
+      if (!formIsValid) {
+        if (firstInvalidInput) {
+          firstInvalidInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstInvalidInput.focus();
+        }
+        return;
+      }
+
+      const submitBtn = document.getElementById('submitBtn');
+      const submitSpinner = document.getElementById('submitSpinner');
+      
+      // Prevent double submits
+      submitBtn.disabled = true;
+      if (submitSpinner) submitSpinner.style.display = 'block';
+
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+
+      // Prepare payload structures
+      const payload = {
+        answers: data,
+        line_user_id: data.line_user_id,
+        displayName: data.displayName,
+        submitted_at: new Date().toISOString()
+      };
+
+      fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("Server response was not OK");
+        // Clear local storage draft after successful submit
+        localStorage.removeItem('liff_req_gathering_draft');
+        showSuccessView();
+      })
+      .catch(err => {
+        console.error("Submission error:", err);
+        alert('❌ เกิดข้อผิดพลาดในการส่งข้อมูลไปยังระบบ (' + err.message + ') กรุณาลองใหม่อีกครั้ง');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        if (submitSpinner) submitSpinner.style.display = 'none';
+      });
+    });
+
+    function showSuccessView() {
+      // Hide form contents
+      formEl.style.display = 'none';
+      
+      // Show success view container
+      document.getElementById('success-view').style.display = 'flex';
+    }
+
+    function restartForm() {
+      formEl.reset();
+      
+      // Restore layout visibilities
+      formEl.style.display = 'block';
+      document.getElementById('success-view').style.display = 'none';
+      setupSimulatorProfile();
+      
+      // Reset radio cards UI
+      const cards = document.querySelectorAll('.radio-card');
+      cards.forEach(card => {
+        const cardVal = card.getAttribute('data-value');
+        card.classList.toggle('active', cardVal === 'ใช้เฉพาะข้อมูลใหม่');
+      });
+    }
+
+    function closeLiffApp() {
+      if (liff && liff.isInClient()) {
+        liff.closeWindow();
+      } else {
+        alert("กรุณาปิดหน้าต่างนี้ด้วยตนเองบนเบราว์เซอร์ของคุณ");
+      }
+    }
+  </script>
+</body>
+</html>
