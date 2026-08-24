@@ -423,6 +423,18 @@
     </div>
   </div>
 
+  <!-- Error Overlay Modal -->
+  <div class="error-overlay" id="error-overlay">
+    <div class="error-modal">
+      <div class="error-icon-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      </div>
+      <h3 style="color: var(--danger-color); margin-top:0; margin-bottom: 8px; font-size:17px; font-weight:700;">เกิดข้อผิดพลาดในการส่งข้อมูล</h3>
+      <p id="error-message-text" style="color: var(--text-sub); font-size: 13px; line-height:1.5; margin-bottom: 20px; word-break: break-word;">ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ตและลองใหม่อีกครั้ง</p>
+      <button type="button" class="nav-action-btn btn-submit" style="background: var(--danger-color); border-radius: 12px; font-weight:700; width: 100%; border:none; padding:12px;" onclick="closeErrorModal()">ตกลง</button>
+    </div>
+  </div>
+
   <!-- Draft recovery dialog toast -->
   <div class="toast" id="draft-toast">
     <span>📝 ระบบกู้คืนข้อมูลร่างที่คุณเคยกรอกไว้แล้ว</span>
@@ -648,13 +660,22 @@
       })
       .catch(err => {
         console.error("Submission error:", err);
-        alert('❌ เกิดข้อผิดพลาดในการส่งข้อมูลไปยังระบบ (' + err.message + ') กรุณาลองใหม่อีกครั้ง');
+        showErrorModal(err.message);
       })
       .finally(() => {
         submitBtn.disabled = false;
         if (submitSpinner) submitSpinner.style.display = 'none';
       });
     });
+
+    function showErrorModal(message) {
+      document.getElementById('error-message-text').innerText = "ไม่สามารถส่งข้อมูลได้: " + message + " (กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต หรือติดต่อผู้ดูแลระบบ)";
+      document.getElementById('error-overlay').style.display = 'flex';
+    }
+
+    function closeErrorModal() {
+      document.getElementById('error-overlay').style.display = 'none';
+    }
 
     function showSuccessView() {
       // Hide form contents
