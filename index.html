@@ -657,8 +657,8 @@
     });
 
     function showSuccessView() {
-      // Hide form contents
-      formEl.style.display = 'none';
+      // Hide form area completely
+      document.querySelector('.form-area').style.display = 'none';
       
       // Show success view container
       document.getElementById('success-view').style.display = 'flex';
@@ -668,6 +668,7 @@
       formEl.reset();
       
       // Restore layout visibilities
+      document.querySelector('.form-area').style.display = 'block';
       formEl.style.display = 'block';
       document.getElementById('success-view').style.display = 'none';
       setupSimulatorProfile();
