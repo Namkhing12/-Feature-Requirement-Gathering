@@ -396,24 +396,25 @@ button.nav-action-btn:active {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 40px 16px 20px 16px;
+  padding: 16px 16px 20px 16px;
 }
 
 .success-icon-wrapper {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  background: var(--accent-light);
+  background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent);
-  margin-bottom: 16px;
+  color: white;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 14px rgba(6, 199, 85, 0.25);
 }
 
 .success-checkmark {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   stroke-dasharray: 40;
   stroke-dashoffset: 40;
   animation: strokeCheck 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.2s forwards;
