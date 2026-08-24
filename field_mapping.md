@@ -14,6 +14,8 @@ When a user submits the form, n8n receives a POST request with the following JSO
     "line_user_id": "U1234567890abcdef...",
     "displayName": "Line User Name",
     "q1_subject": "...",
+    "q1_attachment": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...",
+    "q1_attachment_name": "dashboard_mockup.png",
     "q2_doctypes": "...",
     "q3_asis": "...",
     "q4_tobe": "...",
@@ -65,3 +67,13 @@ When a user submits the form, n8n receives a POST request with the following JSO
 | 17 | มีกรณีพิเศษ / Possible Case อะไรบ้าง? | `q17_exceptions` | Textarea | **Required** |
 | 18 | Expected Result คืออะไร? | `q18_expected_result` | Textarea | **Required** |
 | - | **เวลาที่บันทึกข้อมูล** | `submitted_at` | Timestamp (ISO) | **Required** |
+
+### 📎 ข้อมูลแนบเพิ่มเติม (Question File Attachments)
+
+สำหรับทุกคำถามข้อที่ `N` (ตั้งแต่ 1 ถึง 18) ระบบจะทำการส่งฟิลด์แนบไฟล์เพิ่มเติมแบบอัตโนมัติหากผู้ใช้งานมีการอัปโหลดไฟล์เข้ามา:
+
+| JSON Key | คำอธิบาย (Description) | ประเภทข้อมูล (Format) | สถานะฟิลด์ |
+|---|---|---|---|
+| `qN_attachment` | ข้อมูลไฟล์แนบของข้อที่ `N` ในรูปแบบ Base64 Data URL | String (`data:*/*;base64,...`) | **Optional** |
+| `qN_attachment_name` | ชื่อไฟล์แนบดั้งเดิมพร้อมนามสกุลของข้อที่ `N` | String (เช่น `mockup.png`) | **Optional** |
+

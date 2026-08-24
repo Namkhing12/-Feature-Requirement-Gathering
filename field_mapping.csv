@@ -20,3 +20,6 @@
 "17","มีกรณีพิเศษ / Possible Case อะไรบ้าง?","q17_exceptions","Textarea","Required"
 "18","Expected Result คืออะไร?","q18_expected_result","Textarea","Required"
 "-","เวลาที่บันทึกข้อมูล","submitted_at","Timestamp (ISO)","Required"
+"-","ไฟล์แนบสำหรับคำถามข้อ N (q1-q18)","qN_attachment","Base64 String","Optional"
+"-","ชื่อไฟล์แนบสำหรับคำถามข้อ N (q1-q18)","qN_attachment_name","String","Optional"
+
