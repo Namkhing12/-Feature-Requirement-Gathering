@@ -64,7 +64,7 @@ When a user submits the form, n8n receives a POST request with the following JSO
 | 13 | ต้องเพิ่ม / แก้ไข Print Format หรือไม่? | `q13_print_format` | Input (Text) | **Required** |
 | 14 | ต้องเพิ่ม / แก้ไข Report หรือไม่? | `q14_reports` | Input (Text) | **Required** |
 | 15 | มีข้อมูล / Field ใหม่ที่ต้องเพิ่มหรือไม่? | `q15_new_fields` | Textarea | **Required** |
-| 16 | ต้องมีการแนบไฟล์หรือเอกสารหรือไม่? | `q16_attachments` | Input (Text) | **Required** |
+| 16 | ต้องมีการแนบไฟล์หรือเอกสารหรือไม่? | `q16_attachments` | Input (Text) | **Optional** |
 | 17 | มีกรณีพิเศษ / Possible Case อะไรบ้าง? | `q17_exceptions` | Textarea | **Required** |
 | 18 | Expected Result คืออะไร? | `q18_expected_result` | Textarea | **Required** |
 | - | **เวลาที่บันทึกข้อมูล** | `submitted_at` | Timestamp (ISO) | **Required** |
