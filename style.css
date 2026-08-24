@@ -461,8 +461,9 @@ button.nav-action-btn:active {
   gap: 8px;
 }
 
-.attachment-upload-btn-label {
-  display: inline-flex;
+.attachment-upload-btn-label,
+.attachment-link-btn {
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -476,18 +477,27 @@ button.nav-action-btn:active {
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0;
+  height: 42px;
+  font-family: inherit;
+  line-height: 1;
 }
 
-.attachment-upload-btn-label:hover {
+.attachment-upload-btn-label:hover,
+.attachment-link-btn:hover {
   border-color: var(--accent);
   color: var(--accent);
   background: var(--accent-light);
 }
 
-.attachment-upload-btn-label svg {
+.attachment-upload-btn-label svg,
+.attachment-link-btn svg {
   width: 16px;
   height: 16px;
   color: inherit;
+  flex-shrink: 0;
 }
 
 .attachment-preview {
@@ -580,33 +590,9 @@ button.nav-action-btn:active {
 }
 
 .attachment-link-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border: 1.5px dashed var(--input-border);
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-sub);
-  background: var(--input-bg);
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  flex: 1;
   outline: none;
-}
-
-.attachment-link-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-light);
-}
-
-.attachment-link-btn svg {
-  width: 16px;
-  height: 16px;
-  color: inherit;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .link-input-wrapper {
