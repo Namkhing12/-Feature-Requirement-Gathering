@@ -572,3 +572,98 @@ button.nav-action-btn:active {
   }
 }
 
+.attachment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.attachment-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1.5px dashed var(--input-border);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-sub);
+  background: var(--input-bg);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  width: fit-content;
+  outline: none;
+}
+
+.attachment-link-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.attachment-link-btn svg {
+  width: 16px;
+  height: 16px;
+  color: inherit;
+}
+
+.link-input-wrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  animation: slideDown 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid var(--input-border);
+  border-radius: 12px;
+  background: var(--input-bg);
+  color: var(--text-main);
+  font-size: 13.5px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.link-input:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px var(--accent-light);
+  background-color: var(--bg-card);
+}
+
+.link-submit-btn {
+  padding: 10px 16px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.link-submit-btn:hover {
+  background: var(--accent-hover);
+}
+
+.link-cancel-btn {
+  padding: 10px 16px;
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border: none;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.link-cancel-btn:hover {
+  background: var(--btn-secondary-hover);
+}
+
+

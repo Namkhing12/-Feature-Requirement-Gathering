@@ -16,6 +16,7 @@ When a user submits the form, n8n receives a POST request with the following JSO
     "q1_subject": "...",
     "q1_attachment": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...",
     "q1_attachment_name": "dashboard_mockup.png",
+    "q1_link": "https://www.figma.com/file/mockup123",
     "q2_doctypes": "...",
     "q3_asis": "...",
     "q4_tobe": "...",
@@ -68,12 +69,14 @@ When a user submits the form, n8n receives a POST request with the following JSO
 | 18 | Expected Result คืออะไร? | `q18_expected_result` | Textarea | **Required** |
 | - | **เวลาที่บันทึกข้อมูล** | `submitted_at` | Timestamp (ISO) | **Required** |
 
-### 📎 ข้อมูลแนบเพิ่มเติม (Question File Attachments)
+### 📎 ข้อมูลแนบเพิ่มเติม (Question File & Link Attachments)
 
-สำหรับทุกคำถามข้อที่ `N` (ตั้งแต่ 1 ถึง 18) ระบบจะทำการส่งฟิลด์แนบไฟล์เพิ่มเติมแบบอัตโนมัติหากผู้ใช้งานมีการอัปโหลดไฟล์เข้ามา:
+สำหรับทุกคำถามข้อที่ `N` (ตั้งแต่ 1 ถึง 18) ระบบจะทำการส่งฟิลด์แนบไฟล์ หรือแนบลิงก์เพิ่มเติมแบบอัตโนมัติหากผู้ใช้งานกรอกเข้ามา:
 
 | JSON Key | คำอธิบาย (Description) | ประเภทข้อมูล (Format) | สถานะฟิลด์ |
 |---|---|---|---|
 | `qN_attachment` | ข้อมูลไฟล์แนบของข้อที่ `N` ในรูปแบบ Base64 Data URL | String (`data:*/*;base64,...`) | **Optional** |
 | `qN_attachment_name` | ชื่อไฟล์แนบดั้งเดิมพร้อมนามสกุลของข้อที่ `N` | String (เช่น `mockup.png`) | **Optional** |
+| `qN_link` | ลิงก์แนบภายนอกของข้อที่ `N` (เช่น Google Drive, Figma) | String (URL) | **Optional** |
+
 

@@ -22,4 +22,6 @@
 "-","เวลาที่บันทึกข้อมูล","submitted_at","Timestamp (ISO)","Required"
 "-","ไฟล์แนบสำหรับคำถามข้อ N (q1-q18)","qN_attachment","Base64 String","Optional"
 "-","ชื่อไฟล์แนบสำหรับคำถามข้อ N (q1-q18)","qN_attachment_name","String","Optional"
+"-","ลิงก์แนบสำหรับคำถามข้อ N (q1-q18)","qN_link","String","Optional"
+
 
