@@ -185,6 +185,7 @@ textarea ~ .input-prefix-icon {
 }
 
 .form-group input[type="text"], 
+.form-group input[type="email"], 
 .form-group textarea, 
 .form-group select {
   width: 100%;
