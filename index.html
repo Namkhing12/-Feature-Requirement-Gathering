@@ -52,10 +52,10 @@
         <!-- Hidden user profile fields -->
         <input type="hidden" id="line_user_id" name="line_user_id">
         <input type="hidden" id="displayName" name="displayName">
-        <input type="hidden" id="full_name" name="full_name" value="Pimlapat Chujai">
-        <input type="hidden" id="company" name="company" value="arterypartner Company test">
-        <input type="hidden" id="email" name="email" value="pimlapatchoojai8585@gmail.com">
-        <input type="hidden" id="project_name" name="project_name" value="PROJ-INT-0005">
+        <input type="hidden" id="full_name" name="full_name" value="">
+        <input type="hidden" id="company" name="company" value="">
+        <input type="hidden" id="email" name="email" value="">
+        <input type="hidden" id="project_name" name="project_name" value="">
 
         <!-- Read-Only User Profile Card -->
         <div class="user-info-card">
@@ -68,7 +68,7 @@
             </div>
             <div class="user-info-content">
               <div class="user-info-label">ชื่อผู้แจ้ง (FULL NAME) <span class="info-note">• ดึงข้อมูลจากระบบ ERPNext</span></div>
-              <div class="user-info-value" id="display_full_name">Pimlapat Chujai</div>
+              <div class="user-info-value" id="display_full_name">-</div>
             </div>
           </div>
 
@@ -82,7 +82,7 @@
             </div>
             <div class="user-info-content">
               <div class="user-info-label">บริษัท (COMPANY)</div>
-              <div class="user-info-value" id="display_company">arterypartner Company test</div>
+              <div class="user-info-value" id="display_company">-</div>
             </div>
           </div>
 
@@ -95,7 +95,7 @@
             </div>
             <div class="user-info-content">
               <div class="user-info-label">ผู้แจ้งเรื่อง (EMAIL)</div>
-              <div class="user-info-value" id="display_email">pimlapatchoojai8585@gmail.com</div>
+              <div class="user-info-value" id="display_email">-</div>
             </div>
           </div>
 
@@ -108,7 +108,7 @@
             </div>
             <div class="user-info-content">
               <div class="user-info-label">โครงการ/ระบบ</div>
-              <div class="user-info-value" id="display_project_name">PROJ-INT-0005</div>
+              <div class="user-info-value" id="display_project_name">-</div>
             </div>
           </div>
         </div>
@@ -715,6 +715,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       initTheme();
       injectAttachmentUI();
+      loadProfileFromURL();
       initLiffSDK();
       restoreFormDraft();
       setupFormListeners();
@@ -807,30 +808,46 @@
 
     // Helper function to update profile hidden inputs and read-only display card
     function setProfileData(fullName, company, email, projectName) {
-      if (fullName) {
+      if (fullName !== undefined) {
         const input = document.getElementById('full_name');
         const display = document.getElementById('display_full_name');
         if (input) input.value = fullName;
-        if (display) display.textContent = fullName;
+        if (display) display.textContent = fullName || '-';
       }
-      if (company) {
+      if (company !== undefined) {
         const input = document.getElementById('company');
         const display = document.getElementById('display_company');
         if (input) input.value = company;
-        if (display) display.textContent = company;
+        if (display) display.textContent = company || '-';
       }
-      if (email) {
+      if (email !== undefined) {
         const input = document.getElementById('email');
         const display = document.getElementById('display_email');
         if (input) input.value = email;
-        if (display) display.textContent = email;
+        if (display) display.textContent = email || '-';
       }
-      if (projectName) {
+      if (projectName !== undefined) {
         const input = document.getElementById('project_name');
         const display = document.getElementById('display_project_name');
         if (input) input.value = projectName;
-        if (display) display.textContent = projectName;
+        if (display) display.textContent = projectName || '-';
       }
+    }
+
+    // Function to dynamically load user profile data from URL parameters (e.g. from ERPNext / LIFF URL)
+    function loadProfileFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const fullName = urlParams.get('full_name') || urlParams.get('name') || urlParams.get('fullName');
+      const company = urlParams.get('company');
+      const email = urlParams.get('email');
+      const projectName = urlParams.get('project_name') || urlParams.get('project') || urlParams.get('projectName');
+
+      setProfileData(
+        fullName !== null ? fullName : undefined,
+        company !== null ? company : undefined,
+        email !== null ? email : undefined,
+        projectName !== null ? projectName : undefined
+      );
     }
 
     // LINE LIFF integration core handler
@@ -849,10 +866,12 @@
               document.getElementById('displayName').value = profile.displayName;
 
               const idToken = liff.getDecodedIDToken ? liff.getDecodedIDToken() : null;
-              const userEmail = (idToken && idToken.email) ? idToken.email : "pimlapatchoojai8585@gmail.com";
-              const fullName = "Pimlapat Chujai";
+              const userEmail = (idToken && idToken.email) ? idToken.email : undefined;
 
-              setProfileData(fullName, "arterypartner Company test", userEmail, "PROJ-INT-0005");
+              loadProfileFromURL();
+              if (userEmail && !document.getElementById('email').value) {
+                setProfileData(undefined, undefined, userEmail, undefined);
+              }
             }).catch(err => console.error("Error loading LINE profile:", err));
           } else {
             if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
@@ -869,17 +888,12 @@
         });
     }
 
-    // Fallback Mock Profile for local sandbox testing (non-LINE client)
+    // Fallback Profile for non-LINE client
     function setupSimulatorProfile() {
       document.getElementById('line_user_id').value = "SIM_USR_99999";
       document.getElementById('displayName').value = "Simulator User";
 
-      setProfileData(
-        "Pimlapat Chujai",
-        "arterypartner Company test",
-        "pimlapatchoojai8585@gmail.com",
-        "PROJ-INT-0005"
-      );
+      loadProfileFromURL();
     }
 
     // Custom Radio Card selector logic
