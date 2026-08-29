@@ -120,14 +120,26 @@ When a user submits the form, n8n receives a POST request with the following JSO
 
 ---
 
-### 📎 ข้อมูลแนบเพิ่มเติม (Question File & Link Attachments)
+### 📎 ข้อมูลแนบเพิ่มเติม (Question Multi-File & Link Attachments)
 
-สำหรับทุกคำถามข้อที่ `N` (ตั้งแต่ 1 ถึง 18) ระบบจะทำการส่งฟิลด์แนบไฟล์ หรือแนบลิงก์เพิ่มเติมแบบอัตโนมัติหากผู้ใช้งานกรอกเข้ามา:
+สำหรับทุกคำถามข้อที่ `N` (ตั้งแต่ 1 ถึง 18) ระบบรองรับการแนบไฟล์ได้ **หลายไฟล์** (Multi-file uploads) โดยผู้ใช้งานสามารถเลือกไฟล์หรือกดแนบไฟล์เพิ่มได้ตามต้องการ (จำกัดขนาดไม่เกิน 10MB ต่อไฟล์):
+
+**ประเภทไฟล์ที่รองรับ (Supported Extensions):**
+- **เอกสาร PDF**: `.pdf`
+- **เอกสาร Microsoft Word**: `.doc`, `.docx`
+- **เอกสาร Microsoft Excel**: `.xls`, `.xlsx`
+- **เอกสาร Microsoft PowerPoint**: `.ppt`, `.pptx`
+- **รูปภาพ**: `.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`
+- **ข้อความ / ข้ออมูล**: `.txt`, `.csv`
+- **ไฟล์บีบอัด Archive**: `.zip`, `.rar`
 
 | JSON Key | คำอธิบาย (Description) | ประเภทข้อมูล (Format) | สถานะฟิลด์ |
 |---|---|---|---|
-| `qN_attachment` | ข้อมูลไฟล์แนบของข้อที่ `N` ในรูปแบบ Base64 Data URL | String (`data:*/*;base64,...`) | **Optional** |
-| `qN_attachment_name` | ชื่อไฟล์แนบดั้งเดิมพร้อมนามสกุลของข้อที่ `N` | String (เช่น `mockup.png`) | **Optional** |
+| `qN_attachments` | อาร์เรย์ของไฟล์แนบทั่วหมดในข้อที่ `N` พร้อมรายละเอียดชื่อไฟล์ ขนาด ประเภท และ Base64 Data URL | Array `[ { "name": "...", "type": "...", "size": 1234, "data": "data:..." } ]` | **Optional** |
+| `qN_attachment_count` | จำนวนไฟล์ที่ถูกแนบในข้อที่ `N` | Number (เช่น `3`) | **Optional** |
+| `qN_attachment_names` | รายชื่อไฟล์ที่แนบทั้งหมดคั่นด้วยเครื่องหมายจุลภาค | String (เช่น `mockup1.png, requirement.pdf`) | **Optional** |
+| `qN_attachment` | ข้อมูลไฟล์แนบไฟล์แรกของข้อที่ `N` (เพื่อความยืดหยุ่นกับระบบเดิม) | String (`data:*/*;base64,...`) | **Optional** |
+| `qN_attachment_name` | ชื่อไฟล์แนบไฟล์แรกของข้อที่ `N` | String (เช่น `mockup1.png`) | **Optional** |
 | `qN_link` | ลิงก์แนบภายนอกของข้อที่ `N` (เช่น Google Drive, Figma) | String (URL) | **Optional** |
 
 
