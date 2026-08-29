@@ -134,6 +134,69 @@ body {
   flex: 1;
 }
 
+/* User Profile Read-Only Card */
+.user-info-card {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.user-info-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--input-border);
+}
+
+.user-info-row:first-child {
+  padding-top: 0;
+}
+
+.user-info-row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.user-info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.user-info-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.user-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+}
+
+.user-info-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1px;
+  line-height: 1.2;
+}
+
+.user-info-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+
 /* Premium Labeled Inputs layout */
 .form-group {
   margin-bottom: 24px;
@@ -185,7 +248,6 @@ textarea ~ .input-prefix-icon {
 }
 
 .form-group input[type="text"], 
-.form-group input[type="email"], 
 .form-group textarea, 
 .form-group select {
   width: 100%;
@@ -653,71 +715,6 @@ button.nav-action-btn:active {
 
 .link-cancel-btn:hover {
   background: var(--btn-secondary-hover);
-}
-
-/* ERPNext Profile Card Styling */
-.profile-card {
-  background: var(--input-bg);
-  border: 1.5px solid var(--input-border);
-  border-radius: 16px;
-  padding: 8px 16px;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow-sm);
-}
-
-.profile-item {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 0;
-}
-
-.profile-item:not(:last-child) {
-  border-bottom: 1px dashed var(--input-border);
-}
-
-.profile-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-}
-
-.profile-icon svg {
-  width: 20px;
-  height: 20px;
-}
-
-.profile-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.profile-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.profile-value {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-main);
-  word-break: break-all;
-}
-
-/* Disabled buttons styling */
-.nav-action-btn:disabled,
-.nav-action-btn[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
 }
 
 
