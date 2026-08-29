@@ -850,7 +850,7 @@
 
               const idToken = liff.getDecodedIDToken ? liff.getDecodedIDToken() : null;
               const userEmail = (idToken && idToken.email) ? idToken.email : "pimlapatchoojai8585@gmail.com";
-              const fullName = profile.displayName || "Pimlapat Chujai";
+              const fullName = "Pimlapat Chujai";
 
               setProfileData(fullName, "arterypartner Company test", userEmail, "PROJ-INT-0005");
             }).catch(err => console.error("Error loading LINE profile:", err));
