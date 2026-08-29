@@ -872,6 +872,30 @@
       );
     }
 
+    // Fetch user profile data from n8n ERPNext webhook by LINE userId
+    function fetchUserInfoFromERPNext(userId) {
+      if (!userId) return;
+
+      const webhookUrl = `https://n8n.arterypartner.dev/webhook/get-user-info?userId=${encodeURIComponent(userId)}`;
+
+      fetch(webhookUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data) {
+            populateUserData(data);
+          }
+        })
+        .catch(err => {
+          console.error("Error fetching user info from n8n webhook:", err);
+          loadProfileFromURL();
+        });
+    }
+
     // LINE LIFF integration core handler
     function initLiffSDK() {
       if (LIFF_ID === "YOUR_LIFF_ID") {
@@ -887,13 +911,8 @@
               document.getElementById('line_user_id').value = profile.userId;
               document.getElementById('displayName').value = profile.displayName;
 
-              const idToken = liff.getDecodedIDToken ? liff.getDecodedIDToken() : null;
-              const userEmail = (idToken && idToken.email) ? idToken.email : undefined;
-
-              loadProfileFromURL();
-              if (userEmail && !document.getElementById('email').value) {
-                setProfileData(undefined, undefined, userEmail, undefined);
-              }
+              // Fetch User Info from ERPNext via n8n Webhook using line_user_id
+              fetchUserInfoFromERPNext(profile.userId);
             }).catch(err => console.error("Error loading LINE profile:", err));
           } else {
             if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
@@ -910,12 +929,19 @@
         });
     }
 
-    // Fallback Profile for non-LINE client
+    // Fallback Profile for non-LINE client / Sandbox
     function setupSimulatorProfile() {
-      document.getElementById('line_user_id').value = "SIM_USR_99999";
+      const urlParams = new URLSearchParams(window.location.search);
+      const simUserId = urlParams.get('userId') || urlParams.get('line_user_id') || "SIM_USR_99999";
+
+      document.getElementById('line_user_id').value = simUserId;
       document.getElementById('displayName').value = "Simulator User";
 
-      loadProfileFromURL();
+      if (urlParams.has('userId') || urlParams.has('line_user_id')) {
+        fetchUserInfoFromERPNext(simUserId);
+      } else {
+        loadProfileFromURL();
+      }
     }
 
     // Custom Radio Card selector logic
