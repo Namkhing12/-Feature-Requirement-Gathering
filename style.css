@@ -655,4 +655,69 @@ button.nav-action-btn:active {
   background: var(--btn-secondary-hover);
 }
 
+/* ERPNext Profile Card Styling */
+.profile-card {
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: 16px;
+  padding: 8px 16px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.profile-item:not(:last-child) {
+  border-bottom: 1px dashed var(--input-border);
+}
+
+.profile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.profile-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.profile-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+  word-break: break-all;
+}
+
+/* Disabled buttons styling */
+.nav-action-btn:disabled,
+.nav-action-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 
