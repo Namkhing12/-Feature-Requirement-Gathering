@@ -106,7 +106,7 @@ When a user submits the form, n8n receives a POST request with the following JSO
 | 12 | ต้องมีการปรับปรุงข้อมูลหลัก (Master Data) หรือไม่? | `q12_has_condition` / `q12_master_data` | Toggle (`yes`/`no`) + Input | Mandatory Detail (เมื่อตอบ ใช่) |
 | 13 | ต้องเพิ่ม / แก้ไข Print Format หรือไม่? | `q13_has_condition` / `q13_print_format` | Toggle (`yes`/`no`) + Input | Mandatory Detail (เมื่อตอบ ใช่) |
 | 14 | ต้องเพิ่ม / แก้ไข Report หรือไม่? | `q14_has_condition` / `q14_reports` | Toggle (`yes`/`no`) + Input | Mandatory Detail (เมื่อตอบ ใช่) |
-| 15 | มีข้อมูล / Field ใหม่ที่ต้องเพิ่มหรือไม่? | `q15_has_condition` / `q15_new_fields` | Toggle (`yes`/`no`) + Textarea | Mandatory Detail (เมื่อตอบ ใช่) |
+| 15 | มีข้อมูล / Field ใหม่ที่ต้องเพิ่มหรือไม่? | `q15_has_condition` / `q15_new_fields` | Toggle (`yes`/`no`) + Textarea | Optional Detail (เลือกตอบตามสมัครใจ) |
 | 16 | ต้องมีการแนบไฟล์หรือเอกสารหรือไม่? | `q16_has_condition` / `q16_attachments` | Toggle (`yes`/`no`) + Input | Mandatory Detail (เมื่อตอบ ใช่) |
 | 17 | มีกรณีพิเศษ / Possible Case อะไรบ้าง? | `q17_has_condition` / `q17_exceptions` | Toggle (`yes`/`no`) + Textarea | Mandatory Detail (เมื่อตอบ ใช่) |
 
