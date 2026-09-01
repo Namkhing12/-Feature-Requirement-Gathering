@@ -22,6 +22,10 @@
 "-","เวลาที่บันทึกข้อมูล","submitted_at","Timestamp (ISO)","Required"
 "-","ไฟล์แนบสำหรับคำถามข้อ N (q1-q18)","qN_attachment","Base64 String","Optional"
 "-","ชื่อไฟล์แนบสำหรับคำถามข้อ N (q1-q18)","qN_attachment_name","String","Optional"
+"-","อาร์เรย์ไฟล์แนบทั้งหมด (q1-q18)","qN_attachments","Array","Optional"
+"-","จำนวนไฟล์แนบทั้งหมด (q1-q18)","qN_attachment_count","Number","Optional"
+"-","ลิงก์แนบทั้งหมด (q1-q18)","qN_links","Array","Optional"
+"-","จำนวนลิงก์แนบทั้งหมด (q1-q18)","qN_link_count","Number","Optional"
 "-","ลิงก์แนบสำหรับคำถามข้อ N (q1-q18)","qN_link","String","Optional"
 
 

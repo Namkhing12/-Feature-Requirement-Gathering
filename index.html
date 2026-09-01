@@ -843,37 +843,25 @@
               </label>
               <button type="button" class="attachment-link-btn" id="${qId}_link_btn" onclick="showLinkInput('${qId}')">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                <span>แนบลิงก์ (ถ้ามี)</span>
+                <span id="${qId}_link_btn_text">แนบลิงก์ (ถ้ามี)</span>
               </button>
             </div>
 
             <div class="file-types-note">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-              <span>รองรับไฟล์: PDF, Word (.doc/.docx), Excel (.xls/.xlsx), PPT (.ppt/.pptx), รูปภาพ (.png/.jpg/.gif/.webp), TXT, CSV, ZIP/RAR (ไม่เกิน 10MB/ไฟล์, แนบได้หลายไฟล์)</span>
+              <span>รองรับไฟล์: PDF, Word (.doc/.docx), Excel (.xls/.xlsx), PPT (.ppt/.pptx), รูปภาพ (.png/.jpg/.gif/.webp), TXT, CSV, ZIP/RAR (ไม่เกิน 10MB/ไฟล์, แนบได้หลายไฟล์/หลายลิงก์)</span>
             </div>
 
             <input type="file" id="${qId}_file" class="file-input" style="display: none;" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.png,.jpg,.jpeg,.gif,.webp,.zip,.rar,.txt,.csv" onchange="handleFileChange(event, '${qId}')">
             
             <div class="link-input-wrapper" id="${qId}_link_input_wrapper" style="display: none;">
-              <input type="url" id="${qId}_link_input" class="link-input" placeholder="วางลิงก์ที่นี่ (เช่น Google Drive)" onkeydown="handleLinkKeydown(event, '${qId}')">
+              <input type="url" id="${qId}_link_input" class="link-input" placeholder="วางลิงก์ที่นี่ (เช่น Google Drive, Figma)" onkeydown="handleLinkKeydown(event, '${qId}')">
               <button type="button" class="link-submit-btn" onclick="saveLinkAttachment('${qId}')">ตกลง</button>
               <button type="button" class="link-cancel-btn" onclick="cancelLinkInput('${qId}')">ยกเลิก</button>
             </div>
 
             <div class="file-list-container" id="${qId}_files_list" style="display: none;"></div>
-
-            <div class="attachment-preview" id="${qId}_link_preview" style="display: none; margin-top: 4px;">
-              <div class="file-info">
-                <svg class="file-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                <div class="file-details">
-                  <span class="file-name"><a id="${qId}_link_url" href="#" target="_blank" style="color: inherit; text-decoration: underline;">-</a></span>
-                  <span class="file-size">ลิงก์แนบภายนอก</span>
-                </div>
-              </div>
-              <button type="button" class="remove-attachment-btn" onclick="removeLinkAttachment('${qId}')">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-              </button>
-            </div>
+            <div class="file-list-container" id="${qId}_links_list" style="display: none;"></div>
           </div>
         `;
 
@@ -1234,11 +1222,63 @@
     }
 
     // Link Attachment Handlers
+    function getLinkList(qId) {
+      if (!linkAttachments[qId]) return [];
+      if (Array.isArray(linkAttachments[qId])) return linkAttachments[qId];
+      return [linkAttachments[qId]]; // wrap single string if legacy
+    }
+
+    // Render list of attached links for a question
+    function renderLinkPreviewList(qId) {
+      const container = document.getElementById(`${qId}_links_list`);
+      if (!container) return;
+
+      const linkList = getLinkList(qId);
+      const labelTextEl = document.getElementById(`${qId}_link_btn_text`);
+
+      if (labelTextEl) {
+        if (linkList.length > 0) {
+          labelTextEl.textContent = `+ แนบลิงก์เพิ่ม (${linkList.length})`;
+        } else {
+          labelTextEl.textContent = 'แนบลิงก์ (ถ้ามี)';
+        }
+      }
+
+      if (linkList.length === 0) {
+        container.innerHTML = '';
+        container.style.display = 'none';
+        return;
+      }
+
+      container.style.display = 'flex';
+      container.innerHTML = linkList.map((url, idx) => `
+        <div class="attachment-preview" style="display: flex;">
+          <div class="file-info">
+            <svg class="file-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            <div class="file-details">
+              <span class="file-name"><a href="${escapeHtml(url)}" target="_blank" style="color: inherit; text-decoration: underline;" title="${escapeHtml(url)}">${escapeHtml(url)}</a></span>
+              <span class="file-size">ลิงก์แนบภายนอก (${idx + 1})</span>
+            </div>
+          </div>
+          <button type="button" class="remove-attachment-btn" onclick="removeSingleLink('${qId}', ${idx})" title="ลบลิงก์นี้">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      `).join('');
+    }
+
     function showLinkInput(qId) {
       document.getElementById(`${qId}_link_input_wrapper`).style.display = 'flex';
       document.getElementById(`${qId}_actions_wrapper`).style.display = 'none';
       const input = document.getElementById(`${qId}_link_input`);
       if (input) {
+        input.value = '';
         input.focus();
       }
     }
@@ -1274,38 +1314,35 @@
         return;
       }
 
-      linkAttachments[qId] = url;
-
-      // Update UI states
-      const urlEl = document.getElementById(`${qId}_link_url`);
-      const previewEl = document.getElementById(`${qId}_link_preview`);
-      const linkBtn = document.getElementById(`${qId}_link_btn`);
-
-      if (urlEl) {
-        urlEl.textContent = url;
-        urlEl.href = url;
+      if (!linkAttachments[qId] || !Array.isArray(linkAttachments[qId])) {
+        linkAttachments[qId] = [];
       }
-      if (previewEl) previewEl.style.display = 'flex';
-      if (linkBtn) linkBtn.style.display = 'none';
+
+      linkAttachments[qId].push(url);
+      renderLinkPreviewList(qId);
 
       // Hide input pane and restore actions wrapper
+      input.value = '';
       document.getElementById(`${qId}_link_input_wrapper`).style.display = 'none';
       document.getElementById(`${qId}_actions_wrapper`).style.display = 'flex';
 
       saveFormDraft();
     }
 
+    function removeSingleLink(qId, linkIndex) {
+      if (!linkAttachments[qId] || !Array.isArray(linkAttachments[qId])) return;
+
+      linkAttachments[qId].splice(linkIndex, 1);
+      if (linkAttachments[qId].length === 0) {
+        delete linkAttachments[qId];
+      }
+      renderLinkPreviewList(qId);
+      saveFormDraft();
+    }
+
     function removeLinkAttachment(qId) {
       delete linkAttachments[qId];
-      const previewEl = document.getElementById(`${qId}_link_preview`);
-      if (previewEl) previewEl.style.display = 'none';
-
-      const linkBtn = document.getElementById(`${qId}_link_btn`);
-      if (linkBtn) linkBtn.style.display = 'inline-flex';
-
-      const input = document.getElementById(`${qId}_link_input`);
-      if (input) input.value = '';
-
+      renderLinkPreviewList(qId);
       saveFormDraft();
     }
 
@@ -1443,21 +1480,14 @@
 
           // Restore link attachments states
           Object.keys(savedLinks).forEach(qId => {
-            const urlVal = savedLinks[qId];
-            if (urlVal) {
-              linkAttachments[qId] = urlVal;
-
-              const urlEl = document.getElementById(`${qId}_link_url`);
-              const previewEl = document.getElementById(`${qId}_link_preview`);
-              const linkBtn = document.getElementById(`${qId}_link_btn`);
-
-              if (urlEl) {
-                urlEl.textContent = urlVal;
-                urlEl.href = urlVal;
+            const linkData = savedLinks[qId];
+            if (linkData) {
+              if (Array.isArray(linkData)) {
+                linkAttachments[qId] = linkData;
+              } else if (typeof linkData === 'string' && linkData.trim()) {
+                linkAttachments[qId] = [linkData];
               }
-              if (previewEl) previewEl.style.display = 'flex';
-              if (linkBtn) linkBtn.style.display = 'none';
-
+              renderLinkPreviewList(qId);
               loadedAny = true;
             }
           });
@@ -1492,6 +1522,7 @@
         delete attachments[qId];
         delete linkAttachments[qId];
         renderFilePreviewList(qId);
+        renderLinkPreviewList(qId);
 
         const fileInput = document.getElementById(`${qId}_file`);
         if (fileInput) fileInput.value = '';
@@ -1499,12 +1530,6 @@
         // Clear Link Attachments
         const linkInput = document.getElementById(`${qId}_link_input`);
         if (linkInput) linkInput.value = '';
-
-        const linkPreview = document.getElementById(`${qId}_link_preview`);
-        if (linkPreview) linkPreview.style.display = 'none';
-
-        const linkBtn = document.getElementById(`${qId}_link_btn`);
-        if (linkBtn) linkBtn.style.display = 'inline-flex';
 
         const linkInputWrapper = document.getElementById(`${qId}_link_input_wrapper`);
         if (linkInputWrapper) linkInputWrapper.style.display = 'none';
@@ -1595,7 +1620,13 @@
 
       // Merge link payload mapping
       Object.keys(linkAttachments).forEach(qId => {
-        answersData[`${qId}_link`] = linkAttachments[qId];
+        const linkList = getLinkList(qId);
+        if (linkList.length > 0) {
+          answersData[`${qId}_links`] = linkList; // Array of link strings
+          answersData[`${qId}_link_count`] = linkList.length;
+          answersData[`${qId}_links_text`] = linkList.join('\n');
+          answersData[`${qId}_link`] = linkList.join(', '); // Backward compatibility
+        }
       });
 
       const payload = {
@@ -1644,6 +1675,7 @@
         delete attachments[qId];
         delete linkAttachments[qId];
         renderFilePreviewList(qId);
+        renderLinkPreviewList(qId);
 
         const fileInput = document.getElementById(`${qId}_file`);
         if (fileInput) fileInput.value = '';
@@ -1651,12 +1683,6 @@
         // Clear link attachments UIs
         const linkInput = document.getElementById(`${qId}_link_input`);
         if (linkInput) linkInput.value = '';
-
-        const linkPreview = document.getElementById(`${qId}_link_preview`);
-        if (linkPreview) linkPreview.style.display = 'none';
-
-        const linkBtn = document.getElementById(`${qId}_link_btn`);
-        if (linkBtn) linkBtn.style.display = 'inline-flex';
 
         const linkInputWrapper = document.getElementById(`${qId}_link_input_wrapper`);
         if (linkInputWrapper) linkInputWrapper.style.display = 'none';

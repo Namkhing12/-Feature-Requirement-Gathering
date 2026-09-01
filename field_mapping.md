@@ -135,12 +135,16 @@ When a user submits the form, n8n receives a POST request with the following JSO
 
 | JSON Key | คำอธิบาย (Description) | ประเภทข้อมูล (Format) | สถานะฟิลด์ |
 |---|---|---|---|
-| `qN_attachments` | อาร์เรย์ของไฟล์แนบทั่วหมดในข้อที่ `N` พร้อมรายละเอียดชื่อไฟล์ ขนาด ประเภท และ Base64 Data URL | Array `[ { "name": "...", "type": "...", "size": 1234, "data": "data:..." } ]` | **Optional** |
+| `qN_attachments` | อาร์เรย์ของไฟล์แนบทั้งหมดในข้อที่ `N` พร้อมรายละเอียดชื่อไฟล์ ขนาด ประเภท และ Base64 Data URL | Array `[ { "name": "...", "type": "...", "size": 1234, "data": "data:..." } ]` | **Optional** |
 | `qN_attachment_count` | จำนวนไฟล์ที่ถูกแนบในข้อที่ `N` | Number (เช่น `3`) | **Optional** |
 | `qN_attachment_names` | รายชื่อไฟล์ที่แนบทั้งหมดคั่นด้วยเครื่องหมายจุลภาค | String (เช่น `mockup1.png, requirement.pdf`) | **Optional** |
 | `qN_attachment` | ข้อมูลไฟล์แนบไฟล์แรกของข้อที่ `N` (เพื่อความยืดหยุ่นกับระบบเดิม) | String (`data:*/*;base64,...`) | **Optional** |
 | `qN_attachment_name` | ชื่อไฟล์แนบไฟล์แรกของข้อที่ `N` | String (เช่น `mockup1.png`) | **Optional** |
-| `qN_link` | ลิงก์แนบภายนอกของข้อที่ `N` (เช่น Google Drive, Figma) | String (URL) | **Optional** |
+| `qN_links` | อาร์เรย์ของลิงก์แนบภายนอกทั้งหมดในข้อที่ `N` (เช่น Google Drive, Figma) | Array `[ "https://...", "https://..." ]` | **Optional** |
+| `qN_link_count` | จำนวนลิงก์ที่ถูกแนบในข้อที่ `N` | Number (เช่น `2`) | **Optional** |
+| `qN_links_text` | รายการลิงก์ทั้งหมดคั่นด้วยการขึ้นบรรทัดใหม่ | String | **Optional** |
+| `qN_link` | รวมลิงก์ที่แนบในข้อที่ `N` คั่นด้วยเครื่องหมายจุลภาค (เพื่อความยืดหยุ่นกับระบบเดิม) | String (URL หรือ Comma-separated URLs) | **Optional** |
+
 
 
 
