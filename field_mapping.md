@@ -133,8 +133,10 @@ When a user submits the form, n8n receives a POST request with the following JSO
 - **ข้อความ / ข้ออมูล**: `.txt`, `.csv`
 - **ไฟล์บีบอัด Archive**: `.zip`, `.rar`
 
-| JSON Key | คำอธิบาย (Description) | ประเภทข้อมูล (Format) | สถานะฟิลด์ |
-|---|---|---|---|
+| `hasAttachment` / `has_attachment` | สถานะเปิด/ปิดมีไฟล์แนบหรือลิงก์ในแบบฟอร์ม (`true` / `false`) | Boolean | **System Generated** |
+| `hasFile` / `has_file` | สถานะระบุว่ามีการแนบไฟล์ในแบบฟอร์มหรือไม่ (`true` / `false`) | Boolean | **System Generated** |
+| `hasLink` / `has_link` | สถานะระบุว่ามีการแนบลิงก์ในแบบฟอร์มหรือไม่ (`true` / `false`) | Boolean | **System Generated** |
+| `total_attachment_count` | จำนวนรวมไฟล์และลิงก์แนบทั้งหมดในแบบฟอร์ม | Number | **System Generated** |
 | `qN_attachments` | อาร์เรย์ของไฟล์แนบทั้งหมดในข้อที่ `N` พร้อมรายละเอียดชื่อไฟล์ ขนาด ประเภท และ Base64 Data URL | Array `[ { "name": "...", "type": "...", "size": 1234, "data": "data:..." } ]` | **Optional** |
 | `qN_attachment_count` | จำนวนไฟล์ที่ถูกแนบในข้อที่ `N` | Number (เช่น `3`) | **Optional** |
 | `qN_attachment_names` | รายชื่อไฟล์ที่แนบทั้งหมดคั่นด้วยเครื่องหมายจุลภาค | String (เช่น `mockup1.png, requirement.pdf`) | **Optional** |

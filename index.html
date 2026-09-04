@@ -1604,6 +1604,10 @@
       // Prepare answers structure
       const answersData = { ...data };
 
+      // Calculate overall attachment metrics & flags for n8n
+      let totalFiles = 0;
+      let totalLinks = 0;
+
       // Merge attachments payload mapping
       Object.keys(attachments).forEach(qId => {
         const fileList = getAttachmentList(qId);
@@ -1615,6 +1619,8 @@
           // Backward compatibility for single file consumers
           answersData[`${qId}_attachment`] = fileList[0].data;
           answersData[`${qId}_attachment_name`] = fileList[0].name;
+
+          totalFiles += fileList.length;
         }
       });
 
@@ -1626,14 +1632,38 @@
           answersData[`${qId}_link_count`] = linkList.length;
           answersData[`${qId}_links_text`] = linkList.join('\n');
           answersData[`${qId}_link`] = linkList.join(', '); // Backward compatibility
+
+          totalLinks += linkList.length;
         }
       });
+
+      const hasFiles = totalFiles > 0;
+      const hasLinks = totalLinks > 0;
+      const hasAttachment = (totalFiles + totalLinks) > 0;
+
+      answersData.hasAttachment = hasAttachment;
+      answersData.has_attachment = hasAttachment;
+      answersData.hasFile = hasFiles;
+      answersData.has_file = hasFiles;
+      answersData.hasLink = hasLinks;
+      answersData.has_link = hasLinks;
+      answersData.total_file_count = totalFiles;
+      answersData.total_link_count = totalLinks;
+      answersData.total_attachment_count = totalFiles + totalLinks;
+
+      if (hasAttachment) {
+        answersData.q16_has_condition = 'yes';
+      }
 
       // Set intent flag for n8n Route Flow Switch router
       answersData.intent = 'FEATURE_REQUEST';
 
       const payload = {
         intent: 'FEATURE_REQUEST',
+        hasAttachment: hasAttachment,
+        has_attachment: hasAttachment,
+        hasFile: hasFiles,
+        hasLink: hasLinks,
         answers: answersData,
         line_user_id: data.line_user_id,
         displayName: data.displayName,
