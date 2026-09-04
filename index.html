@@ -1629,7 +1629,11 @@
         }
       });
 
+      // Set intent flag for n8n Route Flow Switch router
+      answersData.intent = 'FEATURE_REQUEST';
+
       const payload = {
+        intent: 'FEATURE_REQUEST',
         answers: answersData,
         line_user_id: data.line_user_id,
         displayName: data.displayName,
